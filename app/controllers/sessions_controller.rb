@@ -1,4 +1,4 @@
-class SessionController < ApplicationController
+class SessionsController < ApplicationController
   def new # login
     login_graphicker = Graphicker.find_by(name: params[:name])
 

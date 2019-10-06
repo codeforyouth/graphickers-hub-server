@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  post 'login' => 'session#new'
+  post 'login' => 'sessions#new'
   resources :portfolios
   resources :images
   resources :graphickers
