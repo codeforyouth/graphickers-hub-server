@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(version: 2019_10_06_061133) do
     t.string "email", null: false
     t.string "password", null: false
     t.string "token"
+    t.integer "image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["image_id"], name: "index_graphickers_on_image_id"
     t.index ["token"], name: "index_graphickers_on_token", unique: true
   end
 
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_061133) do
     t.index ["image_id"], name: "index_portfolios_on_image_id"
   end
 
+  add_foreign_key "graphickers", "images"
   add_foreign_key "images", "users"
   add_foreign_key "portfolios", "images"
 end
