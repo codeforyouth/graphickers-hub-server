@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(version: 2019_10_06_061133) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "graphicker_id", null: false
     t.string "tag", null: false
     t.binary "data", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_images_on_user_id"
+    t.index ["graphicker_id"], name: "index_images_on_graphicker_id"
   end
 
   create_table "portfolios", force: :cascade do |t|
@@ -43,6 +43,6 @@ ActiveRecord::Schema.define(version: 2019_10_06_061133) do
   end
 
   add_foreign_key "graphickers", "images"
-  add_foreign_key "images", "users"
+  add_foreign_key "images", "graphickers"
   add_foreign_key "portfolios", "images"
 end
