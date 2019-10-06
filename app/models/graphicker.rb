@@ -1,5 +1,6 @@
 class Graphicker < ApplicationRecord
   has_secure_token
+  has_one :image
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
