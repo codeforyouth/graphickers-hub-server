@@ -3,7 +3,7 @@ class CreatePortfolios < ActiveRecord::Migration[6.0]
     create_table :portfolios do |t|
       t.string :title
       t.text :show
-      t.reference :image
+      t.references :image, foreign_key: true
 
       t.timestamps
     end
