@@ -46,6 +46,6 @@ class GraphickersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def graphicker_params
-      params.require(:graphicker).permit(:name, :email, :password, :token)
+      params.require(:graphicker).permit(:name, :email, :password, :token, :image)
     end
 end
