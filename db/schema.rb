@@ -13,9 +13,9 @@
 ActiveRecord::Schema.define(version: 2019_10_06_061133) do
 
   create_table "graphickers", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password"
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password", null: false
     t.string "token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -23,17 +23,17 @@ ActiveRecord::Schema.define(version: 2019_10_06_061133) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "tag"
-    t.binary "data"
+    t.integer "user_id", null: false
+    t.string "tag", null: false
+    t.binary "data", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_images_on_user_id"
   end
 
   create_table "portfolios", force: :cascade do |t|
-    t.string "title"
-    t.text "show"
+    t.string "title", null: false
+    t.text "show", null: false
     t.integer "image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
