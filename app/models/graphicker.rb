@@ -1,5 +1,5 @@
 class Graphicker < ApplicationRecord
-  has_secure_token
+  has_secure_token # add by bcrypt. use password, password_confirmation
   has_secure_password
   has_one :image
 
