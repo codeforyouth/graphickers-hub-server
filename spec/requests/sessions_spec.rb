@@ -71,7 +71,7 @@ describe 'Session' do
                 graphicker
                 post '/login', params: FactoryBot.attributes_for(:session)
                 session['token'] = JSON.parse(response.body)['token']
-                post '/logout', params: graphicker
+                post '/logout', params: session
                 expect(response.status).to eq(200)
             end
 
@@ -79,8 +79,34 @@ describe 'Session' do
                 graphicker
                 post '/login', params: FactoryBot.attributes_for(:session)
                 session['token'] = JSON.parse(response.body)['token']
-                post '/logout', params: graphicker
+                post '/logout', params: session
                 expect(Graphicker.find_by(name: 'watson').token_digest).to be_falsey
+            end
+        end
+
+        context 'ログインしていない場合' do
+            example 'リクエストが失敗すること' do
+                graphicker
+                post '/logout', params: FactoryBot.attributes_for(:session)
+                expect(response.status).to eq(422)
+            end
+        end
+
+        context 'トークンが間違っている場合' do
+            example 'リクエストが失敗すること' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session)
+                session['token'] = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+                post '/logout', params: session
+                expect(response.status).to eq(422)
+            end
+
+            example 'グラフィッカーがログアウトに失敗すること(トークンが削除されないこと)' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session)
+                session['token'] = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+                post '/logout', params: session
+                expect(Graphicker.find_by(name: 'watson').token_digest).to be_truthy
             end
         end
     end
