@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Session#new - ログイン' do
+RSpec.describe 'Session#create - ログイン' do
     before do
         FactoryBot.create :graphicker
     end
@@ -13,6 +13,7 @@ RSpec.describe 'Session#new - ログイン' do
 
         it 'グラフィッカーがログインに成功すること' do
             post '/login', params: FactoryBot.attributes_for(:session)
+            puts(JSON.parse(response.body))
             expect(JSON.parse(response.body)['token']).to be_truthy
         end
     end

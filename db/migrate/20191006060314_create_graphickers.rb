@@ -4,7 +4,7 @@ class CreateGraphickers < ActiveRecord::Migration[6.0]
       t.string :name, null: false, unique: true
       t.string :email, null: false, unique: true
       t.string :password_digest, null: false
-      t.string :token, unique: true
+      t.string :token_digest, unique: true
       t.references :image, foreign_key: true, unique: true
 
       t.timestamps

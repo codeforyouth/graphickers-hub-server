@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 2019_10_06_061133) do
     t.string "name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
-    t.string "token"
+    t.string "token_digest"
     t.integer "image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index "\"token\"", name: "index_graphickers_on_token", unique: true
     t.index ["image_id"], name: "index_graphickers_on_image_id"
-    t.index ["token"], name: "index_graphickers_on_token", unique: true
   end
 
   create_table "images", force: :cascade do |t|
