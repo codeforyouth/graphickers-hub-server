@@ -14,7 +14,7 @@ class Graphicker < ApplicationRecord
   end
 
   def destroy_token
-    self.update(token: nil)
+    self.update_attribute(:token, nil)
   end
 
   def generate_login_output(raw_token)
@@ -29,17 +29,8 @@ class Graphicker < ApplicationRecord
     }
   end
 
-  # override methods
-  def new(graphicker_params)
-    graphicker = super(graphicker_params)
-    graphicker.set_token(Graphicker.token_generate)
-  end
-
   # static methods
   def self.generate_token
     SecureRandom.urlsafe_base64(32)
   end
-
-  
-
 end

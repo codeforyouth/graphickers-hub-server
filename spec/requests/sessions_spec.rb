@@ -1,71 +1,87 @@
 require 'rails_helper'
 
-RSpec.describe 'Session#create - ログイン' do
-    before do
+describe 'Session' do
+    let(:graphicker) { # テスト用アカウント
         FactoryBot.create :graphicker
-    end
-
-    context 'パラメータが妥当な場合' do
-        it 'リクエストが成功すること' do
-            post '/login', params: FactoryBot.attributes_for(:session)
-            expect(response.status).to eq(200)
-        end
-
-        it 'グラフィッカーがログインに成功すること' do
-            post '/login', params: FactoryBot.attributes_for(:session)
-            puts(JSON.parse(response.body))
-            expect(JSON.parse(response.body)['token']).to be_truthy
-        end
-    end
-
-    context 'パスワードが違う場合' do
-        it 'リクエストが失敗すること' do
-            post '/login', params: FactoryBot.attributes_for(:session, :invalid_password)
-            expect(response.status).to eq(422)
-        end
-
-        it 'グラフィッカーがログインに失敗すること' do
-            post '/login', params: FactoryBot.attributes_for(:session, :invalid_password)
-            expect(JSON.parse(response.body)['token']).to be_falsey
-        end
-    end
-
-    context '存在しないユーザを指定した場合' do
-        it 'リクエストが失敗すること' do
-            post '/login', params: FactoryBot.attributes_for(:session, :invalid_graphicker)
-            expect(response.status).to eq(422)
-        end
-
-        it 'グラフィッカーがログインに失敗すること' do
-            post '/login', params: FactoryBot.attributes_for(:session, :invalid_graphicker)
-            expect(JSON.parse(response.body)['token']).to be_falsey
-        end
-    end
-end
-
-RSpec.describe 'Session#delete - ログアウト' do
-    before do
-        FactoryBot.create :graphicker
-    end
-    let(:token) {
-        post '/login', params: FactoryBot.attributes_for(:session)
-        JSON.parse(response.body)['token']
-    }
-    let(:user) {
-        FactoryBot.attributes_for(:session)
     }
 
-    context 'パラメータが妥当な場合' do
-        it 'リクエストが成功すること' do
-            user['token'] = token
-            post '/logout', params: user
-            expect(response.status).to eq(200)
+    describe 'Session#create - ログイン' do
+        context 'パラメータが妥当な場合' do
+            example 'リクエストが成功すること' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session)
+                expect(response.status).to eq(200)
+            end
+
+            example 'グラフィッカーがログインに成功すること' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session)
+                expect(JSON.parse(response.body)['token']).to be_truthy
+            end
+
+            example 'グラフィッカーのトークンが生成されていること' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session)
+                expect(Graphicker.find_by(name: 'watson').token_digest).to be_truthy
+            end
         end
 
-        it 'グラフィッカーがログアウトに成功すること' do
-            user['token'] = token
-            post '/logout', params: user
-            expect(User.find_by(name: 'watson').token).to be_falsey
+        context 'パスワードが違う場合' do
+            example 'リクエストが失敗すること' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session, :invalid_password)
+                expect(response.status).to eq(422)
+            end
+
+            example 'グラフィッカーがログインに失敗すること' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session, :invalid_password)
+                expect(JSON.parse(response.body)['token']).to be_falsey
+            end
+            
+            example 'グラフィッカーのトークンが生成されていないこと' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session, :invalid_password)
+                expect(Graphicker.find_by(name: 'watson').token_digest).to be_falsey
+            end
+        end
+
+        context '存在しないユーザを指定した場合' do
+            example 'リクエストが失敗すること' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session, :invalid_graphicker)
+                expect(response.status).to eq(422)
+            end
+
+            example 'グラフィッカーがログインに失敗すること' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session, :invalid_graphicker)
+                expect(JSON.parse(response.body)['token']).to be_falsey
+            end
+        end
+    end
+
+    describe 'Session#delete - ログアウト' do
+        let(:session) {
+            FactoryBot.attributes_for(:session)
+        }
+
+        context 'パラメータが妥当な場合' do
+            example 'リクエストが成功すること' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session)
+                session['token'] = JSON.parse(response.body)['token']
+                post '/logout', params: graphicker
+                expect(response.status).to eq(200)
+            end
+
+            example 'グラフィッカーがログアウトに成功すること(トークンが削除されていること)' do
+                graphicker
+                post '/login', params: FactoryBot.attributes_for(:session)
+                session['token'] = JSON.parse(response.body)['token']
+                post '/logout', params: graphicker
+                expect(Graphicker.find_by(name: 'watson').token_digest).to be_falsey
+            end
         end
     end
 end

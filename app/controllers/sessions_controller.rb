@@ -28,10 +28,10 @@ class SessionsController < ApplicationController
       return
     end
 
-    if logout_graphicker(params[:token])
-      render json: login_graphicker
+    if logout_graphicker.destroy_token
+      render json: logout_graphicker
     else
-      render json: login_graphicker.errors, status: :unprocessable_entity
+      render json: logout_graphicker.errors, status: :unprocessable_entity
     end
 
   end
