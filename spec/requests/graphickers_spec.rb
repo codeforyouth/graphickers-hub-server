@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Graphicker' do
+RSpec.describe 'Graphicker#new' do
     context 'パラメータが妥当な場合' do
         it 'リクエストが成功すること' do
             post '/graphickers', params: {graphicker: FactoryBot.attributes_for(:graphicker)}
