@@ -25,5 +25,13 @@ FactoryBot.define do
         trait :password_unmatch do
             password_confirmation {'hogehoge2'}
         end
+
+        trait :invalid_password do
+            password {'hogehoge2'}
+        end
+
+        trait :invalid_graphicker do
+            name {'invalid_graphicker'}
+        end
     end
 end

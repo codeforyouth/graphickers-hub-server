@@ -1,4 +1,5 @@
 class PortfoliosController < ApplicationController
+  before_action :authenticate, only: [:create, :update, :destroy]
   before_action :set_portfolio, only: [:show, :update, :destroy]
 
   # GET /portfolios
@@ -20,6 +21,7 @@ class PortfoliosController < ApplicationController
     if @portfolio.save
       render json: @portfolio, status: :created, location: @portfolio
     else
+      puts(@portfolio.errors.full_messages)
       render json: @portfolio.errors, status: :unprocessable_entity
     end
   end
@@ -46,6 +48,11 @@ class PortfoliosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def portfolio_params
-      params.require(:portfolio).permit(:title, :show, :image)
+      params.require(:portfolio).permit(:graphicker_id, :title, :show, :image)
+    end
+
+    def authenticate
+      auth_graphicker = Graphicker.find_by(name: params[:name])
+      auth_graphicker.authenticate_token(params[:token])
     end
 end
