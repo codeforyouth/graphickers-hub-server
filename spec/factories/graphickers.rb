@@ -2,6 +2,7 @@ FactoryBot.define do
     factory :graphicker do
         name {'watson'}
         email {'sensunowatson@myemail.com'}
+        introduction {'Code for Nagoya, Aichi, Youthで活躍中。'}
         password {'hogehoge'}
         password_confirmation {'hogehoge'}
 

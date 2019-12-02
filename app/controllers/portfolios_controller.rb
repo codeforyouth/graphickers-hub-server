@@ -48,7 +48,7 @@ class PortfoliosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def portfolio_params
-      params.require(:portfolio).permit(:graphicker_id, :title, :show, :image)
+      params.require(:portfolio).permit(:graphicker_id, :title, :show)
     end
 
     def authenticate

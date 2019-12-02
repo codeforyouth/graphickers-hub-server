@@ -2,7 +2,6 @@ class Graphicker < ApplicationRecord
   has_secure_password # add by bcrypt. use password, password_confirmation
   has_secure_password :token, validations: false
   has_many :portfolio
-  has_one :image
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -23,7 +22,7 @@ class Graphicker < ApplicationRecord
       id: self.id,
       name: self.name,
       email: self.email,
-      image_id: self.image_id,
+      introduction: self.introduction,
       created_at: self.created_at,
       updated_at: self.updated_at,
       token: raw_token

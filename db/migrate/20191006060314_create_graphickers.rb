@@ -3,9 +3,9 @@ class CreateGraphickers < ActiveRecord::Migration[6.0]
     create_table :graphickers do |t|
       t.string :name, null: false, unique: true
       t.string :email, null: false, unique: true
+      t.text :introduction, null: false
       t.string :password_digest, null: false
       t.string :token_digest, unique: true
-      t.references :image, foreign_key: true, unique: true
 
       t.timestamps
     end
