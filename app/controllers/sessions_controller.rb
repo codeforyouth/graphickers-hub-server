@@ -3,12 +3,12 @@ class SessionsController < ApplicationController
     login_graphicker = Graphicker.find_by(name: params[:name])
 
     if login_graphicker == nil
-      render json: {error: 'no such graphicker'}, status: :unprocessable_entity
+      render json: {error: 'no such graphicker or invalid password'}, status: :unprocessable_entity
       return
     end
     
     if not login_graphicker.authenticate(params[:password])
-      render json: login_graphicker.errors, status: :unprocessable_entity
+      render json: {error: 'no such graphicker or invalid password'}, status: :unprocessable_entity
       return
     end
 

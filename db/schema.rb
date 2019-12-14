@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 2019_10_06_061133) do
     t.string "token_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"token\"", name: "index_graphickers_on_token", unique: true
   end
 
   create_table "portfolios", force: :cascade do |t|
