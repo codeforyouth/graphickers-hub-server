@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_061133) do
   create_table "graphickers", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
-    t.text "introduction", null: false
+    t.text "introduction"
     t.string "password_digest", null: false
     t.string "token_digest"
     t.datetime "created_at", precision: 6, null: false
