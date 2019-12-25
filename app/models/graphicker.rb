@@ -5,9 +5,9 @@ class Graphicker < ApplicationRecord
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates :name, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
-  validates :password, length: { minimum: 8 }
+  validates :name, presence: true, uniqueness: true, allow_blank: true
+  validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }, allow_blank: true
+  validates :password, length: { minimum: 8 }, allow_blank: true
 
   def set_token(token)
     self.update_attribute(:token, token)

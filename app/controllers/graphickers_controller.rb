@@ -1,4 +1,5 @@
 class GraphickersController < ApplicationController
+  before_action :authenticate, only: [:update, :destroy]
   before_action :set_graphicker, only: [:show, :update, :destroy]
 
   # GET /graphickers
@@ -47,5 +48,10 @@ class GraphickersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def graphicker_params
       params.require(:graphicker).permit(:name, :email, :introduction, :password, :password_confirmation, :token)
+    end
+
+    def authenticate
+      auth_graphicker = Graphicker.find(params[:id])
+      auth_graphicker.authenticate_token(params[:token])
     end
 end
