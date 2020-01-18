@@ -26,13 +26,10 @@ ActiveRecord::Schema.define(version: 2019_10_06_061133) do
     t.integer "graphicker_id", null: false
     t.string "title", null: false
     t.text "show", null: false
-    t.integer "image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["graphicker_id"], name: "index_portfolios_on_graphicker_id"
-    t.index ["image_id"], name: "index_portfolios_on_image_id"
   end
 
   add_foreign_key "portfolios", "graphickers"
-  add_foreign_key "portfolios", "images"
 end

@@ -1,6 +1,6 @@
 class GraphickersController < ApplicationController
   before_action :authenticate, only: [:update, :destroy]
-  before_action :set_graphicker, only: [:show, :update, :destroy]
+  before_action :set_graphicker, only: [:show, :portfolios, :update, :destroy]
 
   # GET /graphickers
   def index
@@ -12,6 +12,11 @@ class GraphickersController < ApplicationController
   # GET /graphickers/1
   def show
     render json: @graphicker
+  end
+
+  # GET /graphickers/1/portfolios
+  def portfolios
+    render json: @graphicker.portfolio
   end
 
   # POST /graphickers

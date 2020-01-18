@@ -52,7 +52,7 @@ class PortfoliosController < ApplicationController
     end
 
     def authenticate
-      auth_graphicker = Graphicker.find_by(name: params[:id])
+      auth_graphicker = Graphicker.find(params[:portfolio][:graphicker_id])
       auth_graphicker.authenticate_token(params[:token])
     end
 end
