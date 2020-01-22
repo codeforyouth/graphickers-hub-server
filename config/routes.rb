@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post 'logout' => 'sessions#destroy'
 
   get 'graphickers/:id/portfolios' => 'graphickers#portfolios'
+  put 'graphickers/:id/avatar' => 'graphickers#avatar'
 
   resources :portfolios
   resources :images

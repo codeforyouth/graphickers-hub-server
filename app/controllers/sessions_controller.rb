@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy # logout
-    logout_graphicker = Graphicker.find_by(name: params[:name])
+    logout_graphicker = Graphicker.find(params[:id])
 
     if logout_graphicker == nil
       render json: {error: 'no such graphicker'}, status: :unprocessable_entity

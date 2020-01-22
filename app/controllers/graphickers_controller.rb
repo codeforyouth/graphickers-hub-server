@@ -1,22 +1,17 @@
 class GraphickersController < ApplicationController
-  before_action :authenticate, only: [:update, :destroy]
-  before_action :set_graphicker, only: [:show, :portfolios, :update, :destroy]
+  before_action :authenticate, only: [:update, :destroy, :avatar]
+  before_action :set_graphicker, only: [:show, :update, :destroy, :avatar, :portfolios]
 
   # GET /graphickers
   def index
     @graphickers = Graphicker.all
 
-    render json: @graphickers
+    render json: @graphickers, methods: [:avatar_url]
   end
 
   # GET /graphickers/1
   def show
-    render json: @graphicker
-  end
-
-  # GET /graphickers/1/portfolios
-  def portfolios
-    render json: @graphicker.portfolio
+    render json: @graphicker, methods: [:avatar_url]
   end
 
   # POST /graphickers
@@ -33,7 +28,7 @@ class GraphickersController < ApplicationController
   # PATCH/PUT /graphickers/1
   def update
     if @graphicker.update(graphicker_params)
-      render json: @graphicker
+      render json: @graphicker, methods: [:avatar_url]
     else
       render json: @graphicker.errors, status: :unprocessable_entity
     end
@@ -44,6 +39,16 @@ class GraphickersController < ApplicationController
     @graphicker.destroy
   end
 
+  # PUT /graphickers/1/avatar
+  def avatar
+    @graphicker.avatar.attach(params[:avatar])
+  end
+
+  # GET /graphickers/1/portfolios
+  def portfolios
+    render json: @graphicker.portfolio
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_graphicker
@@ -52,7 +57,7 @@ class GraphickersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def graphicker_params
-      params.require(:graphicker).permit(:name, :email, :introduction, :password, :password_confirmation, :token)
+      params.require(:graphicker).permit(:name, :email, :introduction, :avatar, :password, :password_confirmation, :token)
     end
 
     def authenticate
