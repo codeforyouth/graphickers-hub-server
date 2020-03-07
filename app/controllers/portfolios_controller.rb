@@ -1,6 +1,6 @@
 class PortfoliosController < ApplicationController
-  before_action :authenticate, only: [:create, :update, :destroy]
-  before_action :set_portfolio, only: [:show, :update, :destroy]
+  before_action :authenticate, only: [:create, :update, :destroy, :avatars]
+  before_action :set_portfolio, only: [:show, :update, :destroy, :avatars]
 
   # GET /portfolios
   def index
@@ -38,6 +38,11 @@ class PortfoliosController < ApplicationController
   # DELETE /portfolios/1
   def destroy
     @portfolio.destroy
+  end
+
+  # PUT /portfolios/1/avatars
+  def avatars
+    @portfolio.avatars.attach(params[:avatars])
   end
 
   private

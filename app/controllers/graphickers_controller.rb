@@ -46,7 +46,7 @@ class GraphickersController < ApplicationController
 
   # GET /graphickers/1/portfolios
   def portfolios
-    render json: @graphicker.portfolio
+    render json: @graphicker.portfolio, methods: [:avatars_url]
   end
 
   private
@@ -57,7 +57,7 @@ class GraphickersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def graphicker_params
-      params.require(:graphicker).permit(:name, :email, :introduction, :avatar, :password, :password_confirmation, :token)
+      params.require(:graphicker).permit(:name, :email, :introduction, :password, :password_confirmation, :token)
     end
 
     def authenticate
