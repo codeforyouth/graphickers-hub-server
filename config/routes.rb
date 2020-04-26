@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   get 'graphickers/:id/portfolios' => 'graphickers#portfolios'
   put 'graphickers/:id/avatar' => 'graphickers#avatar'
 
-  put 'portfolios/:id/avatars' => 'portfolios#avatars'
+  put 'portfolios/:id/avatar' => 'portfolios#avatar'
+  delete 'portfolios/:id/avatar/:avatar_index' => 'portfolios#delete_avatar'
 
   resources :portfolios
   resources :images

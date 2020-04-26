@@ -1,6 +1,6 @@
 class PortfoliosController < ApplicationController
-  before_action :authenticate, only: [:create, :update, :destroy, :avatars]
-  before_action :set_portfolio, only: [:show, :update, :destroy, :avatars]
+  before_action :authenticate, only: [:create, :update, :destroy, :avatar, :delete_avatar]
+  before_action :set_portfolio, only: [:show, :update, :destroy, :avatar, :delete_avatar]
 
   # GET /portfolios
   def index
@@ -11,7 +11,7 @@ class PortfoliosController < ApplicationController
 
   # GET /portfolios/1
   def show
-    render json: @portfolio
+    render json: @portfolio, methods: [:avatars_url]
   end
 
   # POST /portfolios
@@ -21,7 +21,6 @@ class PortfoliosController < ApplicationController
     if @portfolio.save
       render json: @portfolio, status: :created, location: @portfolio
     else
-      puts(@portfolio.errors.full_messages)
       render json: @portfolio.errors, status: :unprocessable_entity
     end
   end
@@ -40,9 +39,14 @@ class PortfoliosController < ApplicationController
     @portfolio.destroy
   end
 
-  # PUT /portfolios/1/avatars
-  def avatars
-    @portfolio.avatars.attach(params[:avatars])
+  # PUT /portfolios/1/avatar
+  def avatar
+    @portfolio.avatars.attach(params[:avatar])
+  end
+
+  # DELETE /portfolios/1/avatar/0
+  def delete_avatar
+    @portfolio.avatars.attachments[params[:avatar_index].to_i].purge
   end
 
   private
