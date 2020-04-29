@@ -42,6 +42,7 @@ class GraphickersController < ApplicationController
   # PUT /graphickers/1/avatar
   def avatar
     @graphicker.avatar.attach(params[:avatar])
+    render json: @graphicker.avatar_url
   end
 
   # GET /graphickers/1/portfolios
