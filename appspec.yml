@@ -6,4 +6,8 @@ files:
 permissions:
   – object: /home/rails/graphickers-hub
     pattern: "**"
+    owner: rails
+    group: rails
     mode: 775
+    type:
+      – file
