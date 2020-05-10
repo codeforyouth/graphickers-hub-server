@@ -1,4 +1,4 @@
 #!/bin/bash
-cd /var/www/rails
+cd /home/rails/graphickers-hub
 rails db:drop RAILS_ENV=production
-sudo rm -rf /var/www/rails
+sudo rm -rf /home/rails/graphickers-hub
