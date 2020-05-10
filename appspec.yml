@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /var/www/rails
+    destination: /var/rails
 permissions:
-  - object: /var/www/
+  - object: /var/
     pattern: "**"
     mode: 775
 hooks:
