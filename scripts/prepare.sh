@@ -2,6 +2,6 @@
 source /root/.bashrc
 
 cd /var/www/rails
-bundle install
+/root/.rbenv/shims/bundle install
 rails db:create RAILS_ENV=production
 rails db:migrate RAILS_ENV=production 
