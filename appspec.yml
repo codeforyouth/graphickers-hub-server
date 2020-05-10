@@ -2,15 +2,11 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/rails/graphickers-hub
+    destination: /var/www/rails
 permissions:
-  - object: /home/rails/graphickers-hub
+  - object: /var/www/
     pattern: "**"
-    owner: rails
-    group: rails
-    mode: 755
-    type:
-      - file
+    mode: 775
 hooks:
   ApplicationStop:
     - location: scripts/stop_server.sh

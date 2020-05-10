@@ -1,2 +1,2 @@
 #!/bin/bash
-su - rails -c 'kill -KILL -s QUIT `cat /home/rails/graphickers-hub/tmp/pids/server.pid`'
+kill -KILL -s QUIT `cat /var/www/rails/tmp/pids/server.pid`
