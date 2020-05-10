@@ -2,8 +2,8 @@ version: 0.0
 os: linux
 files:
   – source: /
-    destination: /var/rails
+    destination: /home/rails/graphickers-hub
 permissions:
-  – object: /var/
+  – object: /home/rails/graphickers-hub
     pattern: "**"
     mode: 775
