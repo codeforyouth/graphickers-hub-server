@@ -1,13 +1,20 @@
 version: 0.0
 os: linux
 files:
-  – source: /
-    destination: /home/rails/graphickers-hub
+  - source: /
+    destination: /var/www/rails
 permissions:
-  – object: /home/rails/graphickers-hub
+  - object: /var/www/rails
     pattern: "**"
-    owner: rails
-    group: rails
+    owner: root
+    group: root
     mode: 775
     type:
-      – file
+      - file
+hooks:
+  AfterInstall:
+    - location: scripts/prepare.sh
+      runas: root
+  ApplicationStart:
+    - location: scripts/start.sh
+      runas: root
