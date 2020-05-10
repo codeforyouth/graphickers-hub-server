@@ -14,3 +14,9 @@ hooks:
   ApplicationStart:
     - location: scripts/start_server.sh
       runas: root
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      runas: root
+  BeforeInstall:
+    - location: scripts/clean.sh
+      runas: root
