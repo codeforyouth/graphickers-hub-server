@@ -8,12 +8,6 @@ permissions:
     pattern: "**"
     mode: 775
 hooks:
-  ApplicationStop:
-    - location: scripts/stop_server.sh
-      runas: root
-  BeforeInstall:
-    - location: scripts/clean.sh
-      runas: root
   AfterInstall:
     - location: scripts/prepare.sh
       runas: root
