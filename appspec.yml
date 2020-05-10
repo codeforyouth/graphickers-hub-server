@@ -14,13 +14,13 @@ permissions:
 hooks:
   ApplicationStop:
     - location: scripts/stop_server.sh
-      runas: rails
+      runas: root
   BeforeInstall:
     - location: scripts/clean.sh
-      runas: rails
+      runas: root
   AfterInstall:
     - location: scripts/prepare.sh
-      runas: rails
+      runas: root
   ApplicationStart:
     - location: scripts/start_server.sh
-      runas: rails
+      runas: root
