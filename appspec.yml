@@ -12,6 +12,12 @@ permissions:
     type:
       - file
 hooks:
+  ApplicationStop:
+    - location: scripts/stop.sh
+      runas: root
+  BeforeInstall:
+    - location: scripts/clean.sh
+      runas: root
   AfterInstall:
     - location: scripts/prepare.sh
       runas: root
