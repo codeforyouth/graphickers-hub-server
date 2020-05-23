@@ -41,6 +41,15 @@ module GraphickersHub
         controller_specs: false,
         routing_specs: false
     end
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins "*"
+        resource "*",
+          headers: :any,
+          methods: [:get, :post, :put, :delete, :options, :head]
+      end
+    end
   end
 end
 
