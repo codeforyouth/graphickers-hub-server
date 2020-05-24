@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # health check
+  get '/' => 'graphickers#index'
+
   post 'login' => 'sessions#create'
   post 'logout' => 'sessions#destroy'
 
