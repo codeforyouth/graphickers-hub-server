@@ -29,6 +29,7 @@ class Graphicker < ApplicationRecord
       name: self.name,
       email: self.email,
       introduction: self.introduction,
+      equipment: self.equipment,
       avatar_url: self.avatar_url,
       created_at: self.created_at,
       updated_at: self.updated_at,
