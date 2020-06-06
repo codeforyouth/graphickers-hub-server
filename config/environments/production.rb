@@ -104,5 +104,5 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   Rails.application.routes.default_url_options[:host] = 'api.graphickers-hub.net'
-  Rails.application.routes.default_url_options[:port] = 443
+  Rails.application.routes.default_url_options[:port] = 3001
 end
