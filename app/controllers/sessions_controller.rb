@@ -29,19 +29,19 @@ class SessionsController < ApplicationController
     end
 
     if params[:token] == nil
-      render json: logout_graphicker.errors, status: :unprocessable_entity
+      render json: {error: 'no token in params'}, status: :unprocessable_entity
       return
     end
 
     if ! logout_graphicker.authenticate_token(params[:token])
-      render json: logout_graphicker.errors, status: :unprocessable_entity
+      render json: {error: 'token is invalid'}, status: :unprocessable_entity
       return
     end
 
     if logout_graphicker.destroy_token
       render json: logout_graphicker
     else
-      render json: logout_graphicker.errors, status: :unprocessable_entity
+      render json: {error: 'destroy token failed'}, status: :unprocessable_entity
     end
 
   end
