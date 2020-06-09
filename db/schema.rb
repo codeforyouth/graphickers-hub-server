@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_30_122932) do
+ActiveRecord::Schema.define(version: 2020_06_09_095801) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2020_05_30_122932) do
     t.text "show", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "place"
+    t.date "event_date"
     t.index ["graphicker_id"], name: "index_portfolios_on_graphicker_id"
   end
 
