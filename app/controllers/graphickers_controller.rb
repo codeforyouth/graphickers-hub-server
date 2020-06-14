@@ -47,7 +47,16 @@ class GraphickersController < ApplicationController
 
   # GET /graphickers/1/portfolios
   def portfolios
-    render json: @graphicker.portfolio, methods: [:avatars_url]
+    ascdesc = params[:ascdesc]
+    @portfolio = case params[:ordering]
+    when "id"
+      @graphicker.portfolio.order(id: ascdesc)
+    when "event_date"
+      @graphicker.portfolio.order(event_date: ascdesc)
+    else
+      @graphicker.portfolio
+    end
+    render json: @portfolio, methods: [:avatars_url]
   end
 
   private
