@@ -5,8 +5,13 @@ class GraphickersController < ApplicationController
   # GET /graphickers
   def index
     @graphickers = Graphicker.all
-
-    render json: @graphickers, methods: [:avatar_url]
+    render json:
+      @graphickers.select(
+        :avater_url,
+        :name,
+        :introduction
+      ),
+      methods: [:avatar_url]
   end
 
   # GET /graphickers/1
