@@ -7,6 +7,7 @@ class GraphickersController < ApplicationController
     @graphickers = Graphicker.all
     render json:
       @graphickers.select(
+        :id,
         :avater_url,
         :name,
         :introduction
