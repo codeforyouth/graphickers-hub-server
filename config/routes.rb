@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   put 'graphickers/:id/avatar' => 'graphickers#avatar'
 
   put 'portfolios/:id/avatar' => 'portfolios#avatar'
+  get 'portfolios/:id/avatar/:avatar_index' => 'portfolios#show_avatar'
   delete 'portfolios/:id/avatar/:avatar_index' => 'portfolios#delete_avatar'
 
   resources :portfolios
