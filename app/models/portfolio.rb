@@ -16,4 +16,8 @@ class Portfolio < ApplicationRecord
         end
         return nil
     end
+
+    def avatar_url(avatar_index)
+        avatars.attached? ? url_for(avatars[avatar_index].variant(resize: "512x362").processed) : nil
+    end
 end

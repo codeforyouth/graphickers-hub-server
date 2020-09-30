@@ -1,6 +1,6 @@
 class PortfoliosController < ApplicationController
   before_action :authenticate, only: [:create, :update, :destroy, :avatar, :delete_avatar]
-  before_action :set_portfolio, only: [:show, :update, :destroy, :avatar, :delete_avatar]
+  before_action :set_portfolio, only: [:show, :update, :destroy, :avatar, :show_avatar, :delete_avatar]
 
   # GET /portfolios
   def index
@@ -42,6 +42,11 @@ class PortfoliosController < ApplicationController
   # PUT /portfolios/1/avatar
   def avatar
     @portfolio.avatars.attach(params[:avatar])
+  end
+
+  # GET /portfolios/1/avatar/0
+  def show_avatar
+    render json: @portfolio.avatar_url(params[:avatar_index].to_i)
   end
 
   # DELETE /portfolios/1/avatar/0
